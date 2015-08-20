@@ -163,6 +163,35 @@ mxArray *VertBreakdown(const mxArray *res)
 
 }
 
+void VertSplit(mxArray *A, mxArray *b,const mxArray *res)
+{
+  size_t m, n;
+  m = mxGetM(res);
+  n = mxGetN(res) - 1;
+  
+  
+  A = mxCreateNumericMatrix(0, 0, mxDOUBLE_CLASS, mxREAL);
+  b = mxCreateNumericMatrix(0, 0, mxDOUBLE_CLASS, mxREAL);
+
+  double *A_data, *b_data, *res_data;
+  res_data = mxGetPr(res);
+
+  A_data = mxMalloc( m*n*sizeof(*A_data) );
+  b_data = mxMalloc( m*sizeof(*b_data) );
+  
+  memcpy(b_data, res_data, m*sizeof(*res_data) );
+  memcpy(A_data, res_data + m, m*n*sizeof(*res_data) );
+
+  mxSetPr(A, A_data);
+  mxSetM(A, m);
+  mxSetN(A, n);
+
+  mxSetPr(b, b_data);
+  mxSetM(b, m);
+  mxSetN(b, 1);
+  
+}
+
 int my_lrs_init()
 {
     assert ( lrs_mp_init (ZERO, stdin, stdout) );

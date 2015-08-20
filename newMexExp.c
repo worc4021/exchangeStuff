@@ -29,6 +29,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
   helper = MXArray_fromGMPmat(calcMat);
   GMPmat_destroy(calcMat);
 
-  plhs[0] = VertBreakdown(helper);
+  VertSplit(plhs[0],plhs[1],helper);
+  
   mxDestroyArray(helper);
 }
