@@ -41,7 +41,6 @@ mxArray *MXArray_fromGMPmat(const struct GMPmat *A);
 size_t MXArray_to_integer(const mxArray *pm);
 mxArray *VertConcat(const mxArray *A, const mxArray *b);
 mxArray *VertBreakdown(const mxArray *res);
-void VertSplit(mxArray *OutA, mxArray *OutB,const mxArray *res);
 
 /* Interface to the LRS library */
 
